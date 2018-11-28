@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/headp %>
+</head>
+<body>
+    <h1>Введите данные</h1>
+    <form action="/test" method="post">
+        <label>Логин</label><br>
+        <input type="text" name="userLogin" /><br><br>
+        <label>Имя</label><br>
+        <input type="text" name="userName" /><br><br>
+        <label>Возраст</label><br>
+        <input type="number" name="userAge" /><br><br>
+        <input type="submit" value="Отправить" />
+    </form>
+    <form action="/remove" method="get">
+    <input type="submit" value="Удалить" />
+    </form>
+</body>
+<html>

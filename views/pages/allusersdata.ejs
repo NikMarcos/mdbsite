@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <style>
+  body {
+    padding-top:5px;
+    margin-left: 30px;
+  }
+  }
+  footer {
+    padding:50px;
+  }
+  div {
+    width: 500px;
+    border-bottom: 2px red;
+      background: #FFA07A;
+      padding: 10px;
+  }
+</style>
+</head>
+    <body>
+      <h2>Страница пользователя <%= dataF[0].login %></h2><br>
+      <ul>
+    <li class="quote">
+      <span><%= dataF[0].name %></span>
+      <span><%= dataF[0].age %></span>
+    </li><br><br>
+  </ul>
+  <div>
+    <% let sImg = dataF[0].imgname; %>
+    <% if (!sImg) { %>
+    <p>"Загрузите картинку"</p>
+  <%  } else { %>
+    <% sImg.forEach(function (file) { %>
+      <img src="uploads/<%= file %>" style="width: 100%; height: auto" >
+      <form action="/deleteImg/<%= file %>" method="GET">
+        <input type="submit" value="Удалить"/><br><br>
+      </form>
+  <%  }); %>
+<% } %>
+</div><br><br>
+<form action="/loadimage" method="POST" enctype="multipart/form-data">
+  <input type="file" name="imageFile"/><br>
+  <input type="submit" value="Загрузить"/><br><br>
+</form>
+  <form action = "/logout" method = "GET">
+<input type="submit" value="Выход">
+</form>
+  </body>
+</html>

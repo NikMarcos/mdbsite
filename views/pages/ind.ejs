@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= nameofthepage %></title>
+</head>
+    <body>
+  <ul>
+<% for(var i=0; i<dataF.length; i++) {%>
+<li class="quote">
+  <span><%= dataF[i].login %></span>
+  <span><%= dataF[i].name %></span>
+  <span><%= dataF[i].age %></span>
+  <span><% dataF[i].image %></span>
+</li>
+<% } %>
+</ul>
+  <form>
+<input type="button" value="В форму" onClick='location.href="http://localhost:8080/iam"'>
+</form>
+  </body>
+</html>

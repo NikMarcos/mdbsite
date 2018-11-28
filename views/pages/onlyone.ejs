@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+    <body>
+      <h2>Страница пользователя <%= dataF[0].login %></h2><br>
+      <ul>
+  <% for(var i=0; i<dataF.length; i++) {%>
+    <li class="quote">
+      <span><%= dataF[i].name %></span>
+      <span><%= dataF[i].age %></span>
+    </li>
+  <% } %>
+  </ul>
+  <form action="/loadimage" method="POST" enctype="multipart/form-data">
+    <input type="file" name="imageFile" /><br>
+    <input type="submit" value="Отправить" />
+  </form>
+  <form>
+<input type="button" value="В форму" onClick='location.href="http://localhost:8080/iam"'>
+</form>
+  </body>
+</html>

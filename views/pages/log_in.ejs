@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+<h1>Войти в систему</h1>
+<form action='/onlyone' method="post">
+  <label>Логин</label><br>
+  <input type="text" name="userLogin" /><br><br>
+    <label>Пароль</label><br>
+    <input type="text" name="userPass" /><br><br>
+    <input type="submit" value="Отправить" />
+</form><br><br>
+<footer>
+  <% include ../partials/footer %>
+</footer>
+</body>
+<html>

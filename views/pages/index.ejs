@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+    <body>
+      <header>
+        <% include ../partials/header %>
+      </header>
+      <%= name %>
+      <div id = "nik">
+          <h1><%- age %></h1></br>
+          <a href="/">На главную страницу</a>
+      </div>
+      <div>
+        <form action="/mong" method="get">
+            <input type="submit" value="Отправить" />
+        </form></div>
+      <footer>
+    <% include ../partials/footer %>
+  </footer>
+  </body>
+</html>

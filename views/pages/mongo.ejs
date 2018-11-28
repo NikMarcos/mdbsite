@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+  <div>
+    <h1>Внести данные в базу</h1>
+    <form action='/datamongo' method="post" >
+        <label>Логин</label><br>
+        <input type="text" name="userLogin" /><br><br>
+        <label>Пароль</label><br>
+        <input type="text" name="userPass" /><br><br>
+        <label>Имя</label><br>
+        <input type="text" name="userName" /><br><br>
+        <label>Возраст</label><br>
+        <input type="number" name="userAge" /><br><br>
+        <input type="hidden" name="_csrf" value= "<%=  csrfToken %>">
+        <input type="submit" value="Отправить" />
+    </form></br></br>
+  </div>
+    <h1>Войти в систему</h1>
+    <form action='/onlyone' method="post">
+      <label>Логин</label><br>
+      <input type="text" name="userLogin" /><br><br>
+        <label>Пароль</label><br>
+        <input type="text" name="userPass" /><br><br>
+        <input type="submit" value="Отправить" />
+        <input type="hidden" name="_csrf" value= "<%=  csrfToken %>">
+    </form><br><br>
+
+    <h1>Получить данные одного пользователя</h1>
+    <form action='/onlyone' method="post">
+      <label>Логин</label><br>
+      <input type="text" name="userLogin" /><br><br>
+        <label>Имя</label><br>
+        <input type="text" name="userName" /><br><br>
+        <input type="submit" value="Отправить" />
+    </form>
+<br><br>
+<img src="<%= typeof file !=='undefined' ? file : '' %>"/>
+
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+</body>
+<html>
