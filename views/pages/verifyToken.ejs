@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <%- messages('my_message_template', locals) %>
+    <form action='/isit' method="post">
+      <input type="text" name="token" /><br><br>
+      <input type="submit" value="Подтвердить номер телефона" /><br><br>
+    </form>
+    <footer>
+      <% include ../partials/head %>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; background-color: lightblue}
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      #nomer {margin-bottom: 50px}
+      span {color: grey;}
+      .message-title {margin-left: 5px; margin-top: 5px;}
+      .message_body {margin-left: 5px;}
+    </style>
+  </head>
+  <body>
+
+<div id="message_scroll">
+    <form id="message-form">
+      <input type="text" placeholder="message" name="message" /><button type="submit" id="submit-btn">Send</button>
+    </form>
+
+<div id="nomer">
+    <script id="message-template" type="text/template">
+
+
+        <div class="message-title">
+          <strong>{{from}}</strong>&nbsp;<span>{{createdAt}}</span>
+        </div>
+        <div class="message_body">
+          <p>{{text}}</p>
+        </div><br>
+
+    </script>
+    </div>
+  </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.23.0/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script type="text/javascript">
+        let socket = io({transports: ['websocket'], autoConnect: false});
+
+        function scrollToBottom() {
+          let messages = document.querySelector('#nomer').lastElementChild;
+          messages.scrollIntoView();
+        };
+
+        socket.open();
+
+        socket.on('connect', () => {
+          let searchQuery = window.location.search.substring(1);
+          let params = JSON.parse('{"' + decodeURI(searchQuery).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g,'":"') + '"}');
+
+          socket.emit('join', params, function(err) {
+          if (err) {
+            alert(err);
+            window.location.href = '/chat_entrance';
+          } else {
+            console.log('no errors');
+          }
+        })
+        });
+
+        socket.on('disconnect', () => {
+          console.log('I am disconnected');
+        });
+
+        socket.on('updateUsersList', function (users) {
+          console.log(users);
+        })
+
+
+        socket.on('newMessage', (message) => {
+          const formatedTime = moment(message.createdAt).format('LT');
+          const template = document.querySelector('#message-template').innerHTML;
+          const html = Mustache.render(template, {
+            from: message.from,
+            text: message.text,
+            createdAt: formatedTime
+          });
+
+          const div = document.createElement('div');
+          div.innerHTML = html;
+          document.querySelector('#nomer').appendChild(div);
+          scrollToBottom();
+        });
+
+          document.querySelector('#submit-btn').addEventListener('click', function (e) {
+          e.preventDefault();
+
+          socket.emit('createMessage', {
+
+            text: document.querySelector('input[name="message"]').value
+        }, function () {
+
+        })
+        });
+    </script>
+  </body>
+</html>

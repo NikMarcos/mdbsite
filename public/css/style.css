@@ -6,9 +6,3 @@ body {
 footer {
   padding:50px;
 }
-div {
-  width: 500px;
-  border-bottom: 2px red; /* Параметры границы */
-    background: #FFA07A; /* Цвет фона */
-    padding: 10px; /* Поля вокруг текста */
-}

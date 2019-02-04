@@ -4,42 +4,58 @@
     <% include ../partials/head %>
 </head>
 <body>
-  <div>
+    <div>
+      <% if (errors !== undefined){ %>
+    <% for (const error of errors){ %>
+    <div class="alert alert-danger col-sm-3">
+      <%= error.msg %>
+    </div>
+    <% } %>
+    <% }  %>
+    </div>
     <h1>Внести данные в базу</h1>
-    <form action='/datamongo' method="post" >
+    <form action='/iam' method="post" >
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+          <label>Номер телефона</label><br>
+          <input type="text" name="phone" placeholder="79XXXXXXXXX" /><br><br>
+          </div>
+        <div class="col">
         <label>Логин</label><br>
         <input type="text" name="userLogin" /><br><br>
+        </div>
+        <div class="col">
         <label>Пароль</label><br>
-        <input type="text" name="userPass" /><br><br>
+        <input type="password" name="userPass" /><br><br>
+        </div>
+        <div class="col">
+        <label>Подтвердите пароль</label><br>
+        <input type="password" name="confirm" /><br><br>
+        </div>
+        <div class="col">
         <label>Имя</label><br>
         <input type="text" name="userName" /><br><br>
+        </div>
+        <div class="col">
         <label>Возраст</label><br>
         <input type="number" name="userAge" /><br><br>
+        </div>
+        </div>
         <input type="hidden" name="_csrf" value= "<%=  csrfToken %>">
-        <input type="submit" value="Отправить" />
+        <input type="submit" class="btn btn-outline-primary" value="Отправить" />
+        </div>
     </form></br></br>
-  </div>
     <h1>Войти в систему</h1>
-    <form action='/onlyone' method="post">
+    <form action='/entrance/signin' method="post">
       <label>Логин</label><br>
       <input type="text" name="userLogin" /><br><br>
         <label>Пароль</label><br>
-        <input type="text" name="userPass" /><br><br>
+        <input type="password" name="userPass" /><br><br>
         <input type="submit" value="Отправить" />
-        <input type="hidden" name="_csrf" value= "<%=  csrfToken %>">
+        <input type="hidden" name="_csrf" value= "<%= csrfToken %>">
     </form><br><br>
-
-    <h1>Получить данные одного пользователя</h1>
-    <form action='/onlyone' method="post">
-      <label>Логин</label><br>
-      <input type="text" name="userLogin" /><br><br>
-        <label>Имя</label><br>
-        <input type="text" name="userName" /><br><br>
-        <input type="submit" value="Отправить" />
-    </form>
-<br><br>
-<img src="<%= typeof file !=='undefined' ? file : '' %>"/>
-
+    <input type="button" onClick='location.href="http://localhost:8080/chat_entrance"' class="btn btn-outline-danger" value="Чат"/>
     <footer>
       <% include ../partials/footer %>
     </footer>

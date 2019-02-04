@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <style>
-  body {
-    padding-top:5px;
-    margin-left: 30px;
-  }
-  }
-  footer {
-    padding:50px;
-  }
-  div {
-    width: 500px;
-    border-bottom: 2px red;
-      background: #FFA07A;
-      padding: 10px;
-  }
-</style>
+    <% include ../partials/head %>
 </head>
     <body>
+      <%- messages('my_message_template', locals) %>
       <h2>Страница пользователя <%= dataF[0].login %></h2><br>
       <ul>
     <li class="quote">
@@ -30,22 +14,28 @@
   </ul>
   <div>
     <% let sImg = dataF[0].imgname; %>
-    <% if (!sImg) { %>
-    <p>"Загрузите картинку"</p>
+    <% if (!sImg || sImg.length == 0) { %>
+    <div class="alert alert-success col-sm-2">
+      <p class="text-center">"Загрузите картинку"</p>
+    </div>
   <%  } else { %>
     <% sImg.forEach(function (file) { %>
-      <img src="uploads/<%= file %>" style="width: 100%; height: auto" >
-      <form action="/deleteImg/<%= file %>" method="GET">
-        <input type="submit" value="Удалить"/><br><br>
+      <img src="uploads/<%= file %>" class="img-thumbnail" width="10%">
+      <form action="/image/deleteImage/<%= file %>" method="GET">
+        <input type="submit" class="btn btn-outline-danger" value="Удалить"/><br><br>
       </form>
   <%  }); %>
 <% } %>
 </div><br><br>
-<form action="/loadimage" method="POST" enctype="multipart/form-data">
-  <input type="file" name="imageFile"/><br>
+<div class="alert alert-info col-sm-3">
+<form action="/image/loadimage" method="post" enctype="multipart/form-data">
+  <input type="file" name="imageFile"/><br><br>
+  <input type="hidden" name="_csrf" value= "<%=  csrfToken %>">
   <input type="submit" value="Загрузить"/><br><br>
 </form>
-  <form action = "/logout" method = "GET">
+</div>
+
+  <form action = "/entrance/logout" method="get">
 <input type="submit" value="Выход">
 </form>
   </body>

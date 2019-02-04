@@ -4,14 +4,16 @@
     <% include ../partials/head %>
 </head>
 <body>
+    <%- messages('my_message_template', locals) %>
 <h1>Войти в систему</h1>
-<form action='/onlyone' method="post">
+<form action='/entrance/signin' method="post">
   <label>Логин</label><br>
   <input type="text" name="userLogin" /><br><br>
     <label>Пароль</label><br>
     <input type="text" name="userPass" /><br><br>
     <input type="submit" value="Отправить" />
 </form><br><br>
+<input type="submit" value="На главную страницу" onClick='location.href="http://localhost:8080/iam"' />
 <footer>
   <% include ../partials/footer %>
 </footer>
