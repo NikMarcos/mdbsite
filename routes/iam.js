@@ -93,7 +93,7 @@ if (errors.array().length !== 0) {
               });
             });
             randomToken.then(function(value) {
-              var sms = new SMS('CA5605A3-C884-1197-2B79-940243E8E544');
+              var sms = new SMS('xxxxxxxxxxxx');
               sms.sms_send({
                 to: phoneNumber,
                 text: `Код подтверждения_${verToken}`,
